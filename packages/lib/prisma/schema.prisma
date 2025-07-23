@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../src/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SILVANA_DATABASE_URL")
+}
+
+model State {
+  sequence BigInt
+  address  String
+  
+  baseTokenAmount        Decimal @db.Decimal(precision: 80, scale: 0)
+  baseTokenStakedAmount  Decimal @db.Decimal(precision: 80, scale: 0)
+  baseTokenBorrowedAmount Decimal @db.Decimal(precision: 80, scale: 0)
+  
+  quoteTokenAmount       Decimal @db.Decimal(precision: 80, scale: 0)
+  quoteTokenStakedAmount Decimal @db.Decimal(precision: 80, scale: 0)
+  quoteTokenBorrowedAmount Decimal @db.Decimal(precision: 80, scale: 0)
+  
+  bidAmount              Decimal @db.Decimal(precision: 80, scale: 0)
+  bidPrice               Decimal @db.Decimal(precision: 80, scale: 0)
+  bidIsSome              Boolean
+  
+  askAmount              Decimal @db.Decimal(precision: 80, scale: 0)
+  askPrice               Decimal @db.Decimal(precision: 80, scale: 0)
+  askIsSome              Boolean
+  
+  nonce                  Decimal  @db.Decimal(precision: 80, scale: 0)
+  
+  @@id([sequence, address])
+  @@index([sequence])
+  @@index([address])
+}
+
+model FetchedSequences {
+  sequence BigInt @id
+}
+
+enum Operation {
+  CREATE_ACCOUNT
+  BID
+  ASK
+  TRADE
+  TRANSFER
+  PROOF
+}
+
+enum ActionStatus {
+  PENDING
+  PROCESSING
+  SUCCESS
+  FAILED
+}
+
+model ActionRequest {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  operation   Operation 
+  status      ActionStatus    @default(PENDING)
+  
+  // CREATE_ACCOUNT fields
+  address         String?
+  poolPublicKey   String?
+  publicKey       String?
+  publicKeyBase58 String?
+  name            String?
+  role            String?
+  image           String?
+  baseBalance     Decimal? @db.Decimal(precision: 80, scale: 0)
+  quoteBalance    Decimal? @db.Decimal(precision: 80, scale: 0)
+  
+  // BID/ASK fields
+  userPublicKey   String?
+  baseTokenAmount Decimal? @db.Decimal(precision: 80, scale: 0)
+  price           Decimal? @db.Decimal(precision: 80, scale: 0)
+  isSome          Boolean?
+  nonce           Decimal? @db.Decimal(precision: 80, scale: 0)
+  userSignatureR   Decimal? @db.Decimal(precision: 80, scale: 0)
+  userSignatureS   Decimal? @db.Decimal(precision: 80, scale: 0)
+  
+  // TRADE fields
+  buyerPublicKey   String?
+  sellerPublicKey  String?
+  quoteTokenAmount Decimal? @db.Decimal(precision: 80, scale: 0)
+  buyerNonce       Decimal? @db.Decimal(precision: 80, scale: 0)
+  sellerNonce      Decimal? @db.Decimal(precision: 80, scale: 0)
+  
+  // TRANSFER fields
+  senderPublicKey   String?
+  receiverPublicKey String?
+  senderNonce       Decimal? @db.Decimal(precision: 80, scale: 0)
+  receiverNonce     Decimal? @db.Decimal(precision: 80, scale: 0)
+  senderSignatureR   Decimal? @db.Decimal(precision: 80, scale: 0)
+  senderSignatureS   Decimal? @db.Decimal(precision: 80, scale: 0)
+
+  // PROOF fields
+  blockNumber       Decimal? @db.Decimal(precision: 80, scale: 0)
+  sequence          Decimal? @db.Decimal(precision: 80, scale: 0)
+  //publicKeyBase58   String?
+
+  // PROCESSING AGENT ID
+  agent             String?
+
+  // RESULT OF REQUEST
+  jobId             String?
+  digest            String?
+  da_hash           String?
+
+  @@index([operation])
+  @@index([status])
+}
+

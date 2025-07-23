@@ -1,0 +1,81 @@
+{
+  "name": "@dex-agent/lib",
+  "description": "DEX example library",
+  "version": "0.1.0",
+  "author": "DFST",
+  "bugs": "https://github.com/SilvanaOne/dex-agent/issues",
+  "dependencies": {
+    "@mysten/sui": "^1.36.1",
+    "@prisma/client": "^6.12.0",
+    "@silvana-one/api": "^1.0.25",
+    "js-sha256": "^0.11.1",
+    "mina-signer": "^3.0.7",
+    "nanoid": "^5.1.5",
+    "pinata": "2.4.9",
+    "secp256k1": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.15",
+    "@types/secp256k1": "^4.0.6",
+    "dotenv": "^17.2.0",
+    "dotenv-cli": "^8.0.0",
+    "esbuild": "^0.25.8",
+    "prisma": "^6.12.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "exports": {
+    "types": "./dist/node/index.d.ts",
+    "node": {
+      "import": "./dist/node/index.js",
+      "require": "./dist/node/index.cjs"
+    },
+    "browser": "./dist/web/index.js",
+    "default": "./dist/web/index.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://dex.silvana.dev",
+  "keywords": [
+    "cloud",
+    "fungible-token",
+    "mina-protocol",
+    "silvana",
+    "NFT",
+    "proving",
+    "tokens",
+    "typescript"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/web/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "SilvanaOne/dex-agent.git",
+  "scripts": {
+    "build": "rm -rf dist && npm run prisma:generate && tsc && node build-cjs.js &&tsc --build tsconfig.web.json ",
+    "test": "NODE_NO_WARNINGS=1 node --loader=ts-node/esm --enable-source-maps -r dotenv/config --require dotenv/config --env-file=../client/.env --test",
+    "localnet": "RUST_LOG=off,sui_node=info sui start --with-faucet --force-regenesis",
+    "template": "npm run test test/template.test.ts",
+    "price": "npm run test test/price.test.ts",
+    "signature": "npm run test test/signature.test.ts",
+    "public-key": "npm run test test/public-key.test.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:format": "prisma format",
+    "prisma:seed": "dotenv -e ../../.env -- prisma db seed",
+    "prisma:migrate": "dotenv -e ../../.env -- prisma migrate dev --name v10",
+    "prisma:status": "dotenv -e ../../.env -- prisma migrate status",
+    "prisma:studio": "dotenv -e ../../.env -- prisma studio",
+    "prisma:push": "dotenv -e ../../.env -- prisma db push",
+    "prisma:migrate:deploy": "dotenv -e ../../.env -- prisma migrate deploy"
+  },
+  "type": "module",
+  "types": "./dist/node/index.d.ts"
+}

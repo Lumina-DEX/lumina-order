@@ -1,0 +1,14 @@
+env.json
+.env
+.env.test
+.DS_Store
+node_modules/
+cache/
+.yarn/
+.pnp.cjs
+.pnp.loader.mjs
+.vscode/
+.zkcloudworker/
+examples/
+backup/
+src/prisma/
