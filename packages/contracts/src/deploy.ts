@@ -5,6 +5,7 @@ import {
   Mina,
   AccountUpdate,
   PublicKey,
+  UInt64,
 } from "o1js";
 import { DEXContract } from "./contracts/contract.js";
 import {
@@ -76,11 +77,11 @@ export async function deployMinaContract(params: {
   const tx = await Mina.transaction(
     {
       sender: admin,
-      fee: 100_000_000,
+      fee: 500_000_000,
       memo: `Deploy Silvana DEX Contract`,
     },
     async () => {
-      AccountUpdate.fundNewAccount(admin, 1);
+      fundNewAccount(chain, admin, 1);
 
       await dex.deploy({
         admin: admin,
@@ -126,3 +127,27 @@ export async function checkMinaContractDeployment(params: {
   }
   return true;
 }
+
+
+export const fundNewAccount = (network: string, feePayer: PublicKey, numberOfAccounts = 1) => {
+  try {
+
+    const accountUpdate = AccountUpdate.createSigned(feePayer)
+    accountUpdate.label = "AccountUpdate.fundNewAccount()"
+    const fee = (
+      network === "zeko"
+        ? UInt64.from(1e8)
+        : Mina.activeInstance.getNetworkConstants().accountCreationFee
+    ).mul(numberOfAccounts)
+    accountUpdate.balance.subInPlace(fee)
+    return accountUpdate
+  } catch (error) {
+    console.error("fund new account", error)
+    return AccountUpdate.fundNewAccount(feePayer, numberOfAccounts)
+  }
+}
+
+deployMinaContract({
+  poolPrivateKey: process.env.CONTRACT_KEY!,
+  adminPrivateKey: process.env.ADMIN_KEY!
+}).then()

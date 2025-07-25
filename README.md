@@ -1,4 +1,4 @@
-# Silvana DEX POC
+# lumina-order
 
 Ultrafast zk-rollup for trading Mina Fungible Tokens
 
@@ -85,6 +85,4 @@ Txs are signed using mina.signFields() methods
 ### config
 
 - creating and updating config object on sui keeping track of contract addresses on Mina and sui (used by agent and frontend)
-# lumina-order
-# lumina-order
-# lumina-order
+

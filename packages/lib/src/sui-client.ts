@@ -1,4 +1,7 @@
 import { getFullnodeUrl, SuiClient, SuiEvent } from "@mysten/sui/client";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 export type SuiNetwork = "testnet" | "devnet" | "localnet" | "mainnet";
 export const network: SuiNetwork = (process.env.NEXT_PUBLIC_SUI_CHAIN ||
