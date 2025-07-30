@@ -1,0 +1,52 @@
+<mxfile host="65bd71144e">
+    <diagram id="DDbETAwPPSL47h0ydbNv" name="Page-1">
+        <mxGraphModel dx="648" dy="466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="13" value="&#xa;&#xa;Silvana" style="swimlane;startSize=0;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="60" width="510" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Zeko&lt;br&gt;&lt;br&gt;- Verify the proof&lt;br&gt;- Store the new merkle root" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="13" vertex="1">
+                    <mxGeometry x="200" y="240" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Sui&lt;br&gt;&lt;br&gt;- Execute the transaction" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="13">
+                    <mxGeometry x="70" y="30" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Storage&lt;br&gt;(DA Layer, IPFS...)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="13">
+                    <mxGeometry x="400" y="30" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Prover Engine&lt;br&gt;&lt;br&gt;- Generate proof&lt;br&gt;- Merge it&lt;br&gt;- Store the state of the merkle leaf&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="13">
+                    <mxGeometry x="200" y="70" width="110" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="" style="endArrow=classic;startArrow=classic;html=1;exitX=1.009;exitY=0.771;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="13" source="23" target="21">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="230" y="200" as="sourcePoint"/>
+                        <mxPoint x="280" y="150" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="13" source="23" target="8">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="230" y="210" as="sourcePoint"/>
+                        <mxPoint x="280" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" value="" style="endArrow=classic;html=1;exitX=0.675;exitY=1.013;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="13" source="18">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="180" y="210" as="sourcePoint"/>
+                        <mxPoint x="199" y="150" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="Frontend" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="110" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;startArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="19" target="18">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="270" as="sourcePoint"/>
+                        <mxPoint x="360" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
