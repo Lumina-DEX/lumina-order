@@ -86,3 +86,7 @@ Txs are signed using mina.signFields() methods
 
 - creating and updating config object on sui keeping track of contract addresses on Mina and sui (used by agent and frontend)
 
+
+## License
+
+Lumina-owned code in this repository is licensed under the [Apache License 2.0](LICENSE). The adapted EigenLayer examples in `packages/avs-contracts` and `packages/avs-operator` retain their upstream licensing; see [contract licensing](packages/avs-contracts/UPSTREAM-LICENSES.md) and [operator licensing](packages/avs-operator/UPSTREAM-LICENSES.md). Third-party code and dependencies retain their own licenses and notices.
